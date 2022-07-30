@@ -24,13 +24,21 @@
         <td>{{ employee.ename }}</td>
         <td>{{ employee.job_title }}</td>
         <td>{{ employee.MgrName }}</td>
-        <td>{{ employee.hiredate }}</td>
-        <td>{{ employee.salary }}</td>
-        <td>{{ employee.comission }}</td>
+        <td>{{ employee.hiredate | date }}</td>
+        <td>&#x20b9;{{ employee.salary }}</td>
+        <td>
+          {{ employee.comission ? "&#x20b9;" + employee.comission : "" }}
+        </td>
         <td>{{ employee.dname }}</td>
         <td class="text-center edit-block">
-          <span class="edit" [routerLink]="['/edit-employee/', employee.empid]">
-            <button type="button" class="btn btn-success btn-sm">Edit</button>
+          <span
+            style="padding: 5px"
+            class="edit"
+            [routerLink]="['/edit-employee/', employee.empid]"
+          >
+            <button margin:5px type="button" class="btn btn-success btn-sm">
+              Edit
+            </button>
           </span>
           <!-- <span class="delete" (click)="removeEmployee(employee, i)">
             <button type="button" class="btn btn-secondary">new option</button>
