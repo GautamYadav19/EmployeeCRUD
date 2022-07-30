@@ -1,0 +1,34 @@
+<div class="container">
+  <form class="row g-3" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="col-md-6">
+      <label class="form-label">DepartmentId</label>
+      <input type="text" class="form-control" formControlName="deptid" />
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">department Name</label>
+      <input class="form-control" formControlName="dname" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">manger Names</label>
+      <select class="form-control" formControlName="mgrid">
+        <option *ngFor="let mgr of mgrs" value="{{ mgr.empid }}">
+          {{ mgr.ename }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Loacation Id</label>
+      <select class="form-control" formControlName="location_id">
+        <option *ngFor="let loc of locs" value="{{ loc.locationid }}">
+          {{ loc.location }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">ADD</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,57 @@
+<div class="container">
+  <form class="row g-3" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="col-md-6">
+      <label class="form-label">Name</label>
+      <input type="text" class="form-control" formControlName="ename" />
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Jobid</label>
+      <select class="form-control" formControlName="jobid">
+        <option value="mgr">Manager</option>
+        <option value="anay">Analysis</option>
+        <option value="slmn">Saleman</option>
+        <option value="clrk">clerk</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">manger Id</label>
+      <input type="text" class="form-control" formControlName="mgrid" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">hiredate</label>
+      <input type="date" class="form-control" formControlName="hiredate" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Salary</label>
+      <input
+        type="number"
+        class="form-control"
+        id="inputCity"
+        formControlName="salary"
+      />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">comission</label>
+      <input type="text" class="form-control" formControlName="comission" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Department ID </label>
+      <select class="form-control" formControlName="deptid">
+        <option value="10">accountng</option>
+        <option value="20">researching</option>
+        <option value="30">marketing</option>
+        <option value="40">IT</option>
+        <option value="50">operations</option>
+      </select>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">ADD</button>
+    </div>
+  </form>
+</div>
