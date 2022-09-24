@@ -1,6 +1,7 @@
 // const { resolve } = require("@angular/compiler-cli");
 
 const mysql = require("mysql");
+const jwt = require("jsonwebtoken");
 const pool = mysql.createPool({
   host: "localhost",
   user: "root",
@@ -11,6 +12,92 @@ const pool = mysql.createPool({
 });
 let rootdb = {};
 
+rootdb.login = (username, password) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `SELECT * FROM users WHERE username = ? AND password = ?`,
+      [username, password],
+      (err, results) => {
+        if (err) {
+          return reject(err);
+        } else if (!results.length) {
+          console.log("else if  ", results);
+          return resolve({ status: 0, data: [] });
+        } else {
+          console.log("hey ", results);
+          let token = jwt.sign({ data: results }, "secret");
+          const user = { status: 1, data: results, token: token };
+          return resolve(user);
+        }
+      }
+    );
+  });
+};
+//
+
+rootdb.registeration = (input) => {
+  var sql = `Insert Into users (username, email, password) VALUES ( ?, ?, ? )`;
+  console.log(input);
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `SELECT username FROM users WHERE username = ?`,
+      [input.username],
+      (err, results) => {
+        if (err) {
+          return reject({ status: 0, data: err });
+        } else if (!results.length) {
+          console.log("else if  ", results);
+          pool.query(
+            sql,
+            [input.username, input.email, input.password],
+            (err, result) => {
+              if (err) {
+                return reject({ status: 0, data: err });
+              }
+              let token = jwt.sign({ data: result }, "secret");
+              return resolve({ status: 1, data: result, token: token });
+            }
+          );
+        } else {
+          console.log("else if  ", results);
+          return resolve({ status: 0, data: "username already exist" });
+        }
+      }
+    );
+    // pool.query(
+
+    //   sql,  [input.username, input.email, input.password], (err, result) => {
+    //     if (err) {
+    //       return reject(err);
+    //     }
+    //     return resolve(true);
+    //   }
+    // );
+  }); //end
+};
+// rootdb.register = (input) => {
+//   const checkUsername = `Select username FROM users WHERE username = ?`;
+//   return new Promise((resolve, reject) => {
+//   pool.query(checkUsername, [username], (err, result, fields) => {
+//       if(!result.length){
+//         const sql = `Insert Into users (username, email, password) VALUES ( ?, ?, ? )`
+//         con.query(
+//           sql, [username, email, hashed_password],
+//         (err, result) =>{
+//           if(err){
+//             res.send({ status: 0, data: err });
+//             return reject(err);
+//           }
+//           else{
+//             let token = jwt.sign({ data: result }, 'secret')
+//             res.send({ status: 1, data: result, token : token });
+//           }
+
+//         })
+//       }
+//     });
+
+//
 rootdb.employeelist = () => {
   return new Promise((resolve, reject) => {
     pool.query(

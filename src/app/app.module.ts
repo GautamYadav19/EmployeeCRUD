@@ -11,6 +11,9 @@ import { DepartmentCreateComponent } from './components/department-create/depart
 import { DepartmentListComponent } from './components/department-list/department-list.component';
 import { DepartmentEditComponent } from './components/department-edit/department-edit.component';
 import { DatePipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { AuthModule } from './auth/auth/auth.module';
+import { AuthGuardService } from './service/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -28,8 +31,10 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule,
+    AuthModule,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, AuthGuardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

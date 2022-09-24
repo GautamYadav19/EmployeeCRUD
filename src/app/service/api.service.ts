@@ -15,6 +15,31 @@ export default class ApiService {
   baseUri: string = 'http://localhost:3000/api';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient) {}
+
+  // login service get
+  getTypeRequest(url: any) {
+    return this.http.get(`${this.baseUri}${url}`).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+  //
+  postTypeRequest(url: any, payload: any) {
+    return this.http.post(`${this.baseUri}${url}`, payload).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+  putTypeRequest(url: any, payload: any) {
+    return this.http.put(`${this.baseUri}${url}`, payload).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
   // Create - employee
   createEmployee(data: any): Observable<any> {
     let url = `${this.baseUri}/employeeinsert`;

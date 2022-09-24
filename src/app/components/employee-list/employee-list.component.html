@@ -25,7 +25,7 @@
         <td>{{ employee.job_title }}</td>
         <td>{{ employee.MgrName }}</td>
         <td>{{ employee.hiredate | date }}</td>
-        <td>&#x20b9;{{ employee.salary }}</td>
+        <td>{{ employee.salary ? "&#x20b9;" + employee.salary : "" }}</td>
         <td>
           {{ employee.comission ? "&#x20b9;" + employee.comission : "" }}
         </td>
